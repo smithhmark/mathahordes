@@ -2,4 +2,4 @@
 import System.Environment
 
 main :: IO ()
-main = getargs >>= print . head
+main = getArgs >>= print . head
