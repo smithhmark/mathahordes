@@ -1,5 +1,5 @@
 # Intro
 
 ## Usage
-{{{ stack runhaskell Mathahordes.hs <somehting>
-}}}
+` stack runhaskell Mathahordes.hs <something>
+`
