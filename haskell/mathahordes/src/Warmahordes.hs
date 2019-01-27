@@ -18,6 +18,7 @@ type PlayerName = String
 
 data BaseSize = SmallBase | MediumBase | LargeBase | HugeBase 
         deriving (Show, Eq, Ord)
+
 getDiameter :: BaseSize -> Int
 getDiameter SmallBase = 30
 getDiameter MediumBase = 40 
