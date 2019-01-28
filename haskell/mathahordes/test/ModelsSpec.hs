@@ -5,17 +5,6 @@ import Test.Hspec
 import Models
 import Warmahordes
 
-{-                base :: BaseSize
-                , spd :: Int
-                str
-                , mat :: Int
-                , rat :: Int
-                , def :: Int
-                , arm :: Int
-                , cmd :: Int
-                , hp :: Int
--}
-
 spec = do 
   let shortStr = "BasicStats S 6 4 5 4 12 10 7 1"
       exampleObj = BasicStats SmallBase 6 4 5 4 12 10 7 1
