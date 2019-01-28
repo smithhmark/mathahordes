@@ -1,8 +1,49 @@
 module Models where
 
+import Warmahordes 
+
 data ModelType = Trooper | Solo | Warbeast | Warmachine | Warlock | Warcaster 
         deriving (Show, Eq, Ord)
 
+data BasicStats = BasicStats {
+                base :: BaseSize
+                , spd :: Int
+                , mat :: Int
+                , rat :: Int
+                , arm :: Int
+                , def :: Int
+                , cmd :: Int
+                , hp :: Int
+                  } deriving (Show, Read, Eq, Ord)
+
+toString :: BasicStats -> String
+toString  (BasicStats b s m r a d c h) = "BasicStats" 
+  ++ " " ++ [show b !! 0 ]
+  ++ " " ++ show s
+  ++ " " ++ show m
+  ++ " " ++ show r
+  ++ " " ++ show a
+  ++ " " ++ show d
+  ++ " " ++ show c
+  ++ " " ++ show h
+
+fromString :: String -> BasicStats
+fromString str = 
+  let bits = words str
+      s = read $ bits !! 2 :: Int
+      m = read $ bits !! 3 :: Int
+      r = read $ bits !! 4 :: Int
+      a = read $ bits !! 5 :: Int
+      d = read $ bits !! 6 :: Int
+      c = read $ bits !! 7 :: Int
+      h = read $ bits !! 8 :: Int
+      b = case bits !! 1 of "S" -> SmallBase
+                            "M" -> MediumBase
+                            "L" -> LargeBase
+                            "H" -> HugeBase
+  in BasicStats b s m r a d c h
+  
+  {-
 data StatLine = StatLine { base :: BaseSize
                 , flavor :: ModelType
                 , spd :: Int
@@ -30,7 +71,7 @@ data Model = Model { name :: String
              , loc :: Location
              , battleGroup :: Maybe ModelName
              , effects :: [String]
-             , meelee :: [Weapon]
+             , melee :: [Weapon]
              , ranged :: [Weapon]
              , starAttack :: [Power]
              , starAction :: [Power]
@@ -60,3 +101,4 @@ data GameState = GameState { player :: [PlayerName]
                            , currentP :: Int
                            , board :: Board
                            }
+-}

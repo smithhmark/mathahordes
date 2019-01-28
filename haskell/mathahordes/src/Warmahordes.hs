@@ -17,7 +17,7 @@ gameFlavor fac
 type PlayerName = String
 
 data BaseSize = SmallBase | MediumBase | LargeBase | HugeBase 
-        deriving (Show, Eq, Ord)
+        deriving (Show, Read,  Eq, Ord)
 
 getDiameter :: BaseSize -> Int
 getDiameter SmallBase = 30
