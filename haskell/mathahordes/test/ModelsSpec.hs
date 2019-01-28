@@ -7,17 +7,19 @@ import Warmahordes
 
 {-                base :: BaseSize
                 , spd :: Int
+                str
                 , mat :: Int
                 , rat :: Int
-                , arm :: Int
                 , def :: Int
+                , arm :: Int
                 , cmd :: Int
                 , hp :: Int
 -}
+
 spec = do 
-  let shortStr = "BasicStats S 6 5 4 10 12 7 1"
-      exampleObj = BasicStats SmallBase 6 5 4 10 12 7 1
-      longStr = "BasicStats {base = SmallBase, spd = 6, mat = 5, rat = 4, arm = 10, def = 12, cmd = 7, hp = 1}"
+  let shortStr = "BasicStats S 6 4 5 4 12 10 7 1"
+      exampleObj = BasicStats SmallBase 6 4 5 4 12 10 7 1
+      longStr = "BasicStats {base = SmallBase, spd = 6, str = 4, mat = 5, rat = 4, def = 12, arm = 10, cmd = 7, hp = 1}"
   describe "BasicStats" $ do
     context "showing and reading" $ do
       it "should be readable from a string" $ 
@@ -32,5 +34,5 @@ spec = do
       it "should be readable from a short string" $
         fromString shortStr `shouldBe` exampleObj
       it "should be writeable to a short string" $
-        toString exampleObj`shouldBe`  shortStr
+        toString exampleObj `shouldBe` shortStr
 

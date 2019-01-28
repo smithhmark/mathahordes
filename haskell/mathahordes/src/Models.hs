@@ -1,6 +1,6 @@
 module Models where
 
-import Warmahordes 
+import Warmahordes
 
 data ModelType = Trooper | Solo | Warbeast | Warmachine | Warlock | Warcaster 
         deriving (Show, Eq, Ord)
@@ -8,40 +8,45 @@ data ModelType = Trooper | Solo | Warbeast | Warmachine | Warlock | Warcaster
 data BasicStats = BasicStats {
                 base :: BaseSize
                 , spd :: Int
+                , str :: Int
                 , mat :: Int
                 , rat :: Int
-                , arm :: Int
                 , def :: Int
+                , arm :: Int
                 , cmd :: Int
                 , hp :: Int
+                --, fofur :: Maybe Int
+                --, thrsh :: Maybe Int
                   } deriving (Show, Read, Eq, Ord)
 
 toString :: BasicStats -> String
-toString  (BasicStats b s m r a d c h) = "BasicStats" 
+toString  (BasicStats b sp st m r d a c h) = "BasicStats" 
   ++ " " ++ [show b !! 0 ]
-  ++ " " ++ show s
+  ++ " " ++ show sp
+  ++ " " ++ show st
   ++ " " ++ show m
   ++ " " ++ show r
-  ++ " " ++ show a
   ++ " " ++ show d
+  ++ " " ++ show a
   ++ " " ++ show c
   ++ " " ++ show h
 
 fromString :: String -> BasicStats
 fromString str = 
   let bits = words str
-      s = read $ bits !! 2 :: Int
-      m = read $ bits !! 3 :: Int
-      r = read $ bits !! 4 :: Int
-      a = read $ bits !! 5 :: Int
+      sp = read $ bits !! 2 :: Int
+      st = read $ bits !! 3 :: Int
+      m = read $ bits !! 4 :: Int
+      r = read $ bits !! 5 :: Int
       d = read $ bits !! 6 :: Int
-      c = read $ bits !! 7 :: Int
-      h = read $ bits !! 8 :: Int
+      a = read $ bits !! 7 :: Int
+      c = read $ bits !! 8 :: Int
+      h = read $ bits !! 9 :: Int
       b = case bits !! 1 of "S" -> SmallBase
                             "M" -> MediumBase
                             "L" -> LargeBase
                             "H" -> HugeBase
-  in BasicStats b s m r a d c h
+  in BasicStats b sp st m r d a c h
   
   {-
 data StatLine = StatLine { base :: BaseSize
