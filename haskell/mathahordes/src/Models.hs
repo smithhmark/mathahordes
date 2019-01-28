@@ -1,38 +1,46 @@
 module Models where
 
-import Warmahordes
+import           Warmahordes
 
-data ModelType = Trooper | Solo | Warbeast | Warmachine | Warlock | Warcaster 
-        deriving (Show, Eq, Ord)
+data ModelType
+  = Trooper
+  | Solo
+  | Warbeast
+  | Warmachine
+  | Warlock
+  | Warcaster
+  deriving (Show, Eq, Ord)
 
-data BasicStats = BasicStats {
-                base :: BaseSize
-                , spd :: Int
-                , str :: Int
-                , mat :: Int
-                , rat :: Int
-                , def :: Int
-                , arm :: Int
-                , cmd :: Int
-                , hp :: Int
+data BasicStats = BasicStats
+  { base :: BaseSize
+  , spd  :: Int
+  , str  :: Int
+  , mat  :: Int
+  , rat  :: Int
+  , def  :: Int
+  , arm  :: Int
+  , cmd  :: Int
+  , hp   :: Int
                 --, fofur :: Maybe Int
                 --, thrsh :: Maybe Int
-                  } deriving (Show, Read, Eq, Ord)
+  } deriving (Show, Read, Eq, Ord)
 
 toString :: BasicStats -> String
-toString  (BasicStats b sp st m r d a c h) = "BasicStats" 
-  ++ " " ++ [show b !! 0 ]
-  ++ " " ++ show sp
-  ++ " " ++ show st
-  ++ " " ++ show m
-  ++ " " ++ show r
-  ++ " " ++ show d
-  ++ " " ++ show a
-  ++ " " ++ show c
-  ++ " " ++ show h
+toString (BasicStats b sp st m r d a c h) =
+  "BasicStats" ++
+  " " ++
+  [show b !! 0] ++
+  " " ++
+  show sp ++
+  " " ++
+  show st ++
+  " " ++
+  show m ++
+  " " ++
+  show r ++ " " ++ show d ++ " " ++ show a ++ " " ++ show c ++ " " ++ show h
 
 fromString :: String -> BasicStats
-fromString str = 
+fromString str =
   let bits = words str
       sp = read $ bits !! 2 :: Int
       st = read $ bits !! 3 :: Int
@@ -42,12 +50,13 @@ fromString str =
       a = read $ bits !! 7 :: Int
       c = read $ bits !! 8 :: Int
       h = read $ bits !! 9 :: Int
-      b = case bits !! 1 of "S" -> SmallBase
-                            "M" -> MediumBase
-                            "L" -> LargeBase
-                            "H" -> HugeBase
-  in BasicStats b sp st m r d a c h
-  
+      b =
+        case bits !! 1 of
+          "S" -> SmallBase
+          "M" -> MediumBase
+          "L" -> LargeBase
+          "H" -> HugeBase
+   in BasicStats b sp st m r d a c h
   {-
 data StatLine = StatLine { base :: BaseSize
                 , flavor :: ModelType
